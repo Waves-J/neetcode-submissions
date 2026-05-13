@@ -1,0 +1,29 @@
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        most_amt = 0
+        window_char = defaultdict(int)
+        most_char = ""
+
+        left = 0
+        right = 0
+
+        while right < len(s):
+            window_char[s[right]] += 1
+            if window_char[s[right]] > window_char[most_char]:
+                most_char = s[right]
+
+            if window_char[most_char] + k > right - left:
+                most_amt += 1
+                right += 1
+            else:
+                window_char[s[left]] -= 1
+                left += 1
+                right += 1        
+        
+        return most_amt
+            
+
+
+
+
+            
