@@ -1,0 +1,19 @@
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        dp = [[-1] * n for _ in range(m)]
+
+        def dfs(c, r):
+            if r == m - 1 and c == n - 1:
+                dp[r][c] = 1
+                return 1
+            
+            if r > m - 1 or c > n - 1:
+                return 0
+            
+            if dp[r][c] != -1:
+                return dp[r][c]
+
+            dp[r][c] = dfs(c, r + 1) + dfs(c + 1, r)
+            return dp[r][c]
+
+        return dfs(0, 0)
